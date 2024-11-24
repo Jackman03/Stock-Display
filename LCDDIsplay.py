@@ -14,9 +14,9 @@ LCD.clear()
 try:
 	while True:
 		
-		#the top of the screen should be flowing stock prices
+		#the top of the screen should be scrolling stock prices
 
-		#Display date & time at the bottom of the scree 
+		#Display date & time at the bottom of the screen
 		now = datetime.now()
 		Curdate = str(now.strftime("%m-%d-%Y %H:%M:%S"))
 		
