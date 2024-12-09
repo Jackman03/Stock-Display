@@ -1,21 +1,15 @@
 #New method using the Unoffical Yahoo Finance API
 import requests
 import time
+import json
 
+MAX_RETRIES = 3
 
-def printDebug(r: requests):
-    print(f'Status code: {r.status_code}')
-    RetryTime = r.headers.get('Retry-After')
-    print(f'Retry time: {RetryTime}')
+STOCK_ERROR = [-1,-1,-1]
+CODE_FILE = 'HTTPCodes.json'
 
-
-def GetCurrentPrice(ticker):
-
-    #For header retry time
-    MAX_RETRIES = 3
-
-    #Request headers from curl
-    headers = {
+#Request headers from curl
+HTTP_HEADERS = {
     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0',
     'Accept': '*/*',
     'Accept-Language': 'en-US,en;q=0.5',
@@ -32,45 +26,56 @@ def GetCurrentPrice(ticker):
     'Priority': 'u=4',
     # Requests doesn't support trailers
     # 'TE': 'trailers',
-    }
+}
 
+def printDebug(r: requests,retries):
+    print(f'Status code: {r.status_code}')
+    RetryTime = r.headers.get('Retry-After')
+    print(f'Retry time: {RetryTime}')
+    print(f'Request attempt: {retries}')
+
+def LoadJson(jsonFile):
+    with open(jsonFile,'r') as file:
+        return json.load(file)
+
+#Returns the current price, change and % change, Returns HTTP status as well
+def GetCurrentPrice(ticker: str):
+
+    #For header retry time
+    #Allow the max amount of retries
+    #This will allow us to make multiple requests if one fails.
+    for retries in range(0,MAX_RETRIES):
     #Requests
-    r = requests.get(
-        f'https://query2.finance.yahoo.com/v8/finance/chart/{ticker}?period1=1732143600&period2=1732662000&interval=1m&includePrePost=true&events=div%7Csplit%7Cearn&&lang=en-US&region=US',
-        #cookies=cookies,
-        headers=headers,
-    )
-    #Error checking
+        r = requests.get(
+            f'https://query2.finance.yahoo.com/v8/finance/chart/{ticker}?period1=1732143600&period2=1732662000&interval=1m&includePrePost=true&events=div%7Csplit%7Cearn&&lang=en-US&region=US',
+            #cookies=cookies,
+            headers=HTTP_HEADERS,
+        )
 
-    match r.status_code:
-        case 200:
-            printDebug(r)
+        HTTPCodeList = LoadJson(CODE_FILE)
 
-            #dump json
-            data = r.json()
-            curprice = data['chart']['result'][0]['meta']['regularMarketPrice']
-            lastchange = data['chart']['result'][0]['meta']['previousClose']
-
-            amtchange = curprice - lastchange
-
-            amtchange = round(amtchange,2)
-
-            perChange = round(((curprice - lastchange) / curprice) * 100,2)
-
-            print(curprice)
-
-            print(perChange)
-
-            print(amtchange)
-
-            return curprice,perChange,amtchange
-    
-        #WIP
-        #Too many requests error
-        case 429:
-            #Allow the max amount of retries
-            for retries in range(0,MAX_RETRIES):
-            #Get "Retry-After" header
+        #Extract HTTP status code, status, and description
+        HTTPCodes = [r.status_code, r.reason, r.text]
+        #Error check ing
+        #printDebug(r,retries)
+        match r.status_code:
+            case 200:
+                
+                #dump json
+                data = r.json()
+                curprice = data['chart']['result'][0]['meta']['regularMarketPrice']
+                lastchange = data['chart']['result'][0]['meta']['previousClose']
+                amtchange = curprice - lastchange
+                amtchange = round(amtchange,2)
+                perChange = round(((curprice - lastchange) / curprice) * 100,2)
+                PriceData = [curprice,perChange,amtchange]
+                HTTPCodes[2] = HTTPCodeList[3]['description']
+                return PriceData, HTTPCodes
+        
+            #WIP
+            #Too many requests error
+            case 429:
+                #Get "Retry-After" header
                 RetryTime = r.headers.get('Retry-After')
 
                 #Calculate the wait time
@@ -81,14 +86,20 @@ def GetCurrentPrice(ticker):
                     WaitTime = retries * MAX_RETRIES
                 time.sleep(WaitTime)
 
-        #WIP
-        #Page not found error
-        case 404:
-            #One possible issue is the stock name is in all lowercase. so we
-            print('404 error')
-
-   
-
-GetCurrentPrice('SPY')
-
-
+            #WIP
+            #Page not found error
+            case 404:
+                #This error is likely due to an invalid ticker. Send custom message
+                #Return -1 for all errors
+                HTTPCodes[2] = 'The server could not find the requested resource likely due to invalid ticker.'
+                return STOCK_ERROR ,HTTPCodes
+            
+                         
+            #Base case. Could be a website issue or another error.
+            case _:
+                #since the HTTP headers return a weird string for the description, we will grab one from here.
+                for code in HTTPCodeList:
+                    if HTTPCodes[0] == code['code']:
+                        HTTPCodes[2] = code['description']
+                    
+                return STOCK_ERROR ,HTTPCodes

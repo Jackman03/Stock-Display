@@ -1,0 +1,21 @@
+[
+    {"Ticker": "VOO", "Name": "Vanguard S&P 500 ETF"},
+    {"Ticker": "AAPL", "Name": "Apple Inc."},
+    {"Ticker": "MSFT", "Name": "Microsoft Corporation"},
+    {"Ticker": "GOOGL", "Name": "Alphabet Inc. (Class A)"},
+    {"Ticker": "AMZN", "Name": "Amazon.com, Inc."},
+    {"Ticker": "TSLA", "Name": "Tesla, Inc."},
+    {"Ticker": "META", "Name": "Meta Platforms, Inc."},
+    {"Ticker": "NVDA", "Name": "NVIDIA Corporation"},
+    {"Ticker": "DIS", "Name": "The Walt Disney Company"},
+    {"Ticker": "JNJ", "Name": "Johnson & Johnson"},
+    {"Ticker": "WMT", "Name": "Walmart Inc."},
+    {"Ticker": "V", "Name": "Visa Inc."},
+    {"Ticker": "PG", "Name": "Procter & Gamble Co."},
+    {"Ticker": "MA", "Name": "Mastercard Incorporated"},
+    {"Ticker": "PYPL", "Name": "PayPal Holdings, Inc."},
+    {"Ticker": "NFLX", "Name": "Netflix, Inc."},
+    {"Ticker": "AMD", "Name": "Advanced Micro Devices, Inc."},
+    {"Ticker": "BABA", "Name": "Alibaba Group Holding Limited"},
+    {"Ticker": "XOM", "Name": "Exxon Mobil Corporation"}
+]
