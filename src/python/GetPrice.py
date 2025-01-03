@@ -6,7 +6,7 @@ import json
 MAX_RETRIES = 3
 
 STOCK_ERROR = [-1,-1,-1]
-CODE_FILE = 'HTTPCodes.json'
+CODE_FILE = 'src/data/HTTPCodes.json'
 
 #Request headers from curl
 HTTP_HEADERS = {
@@ -47,7 +47,7 @@ def GetCurrentPrice(ticker: str):
     for retries in range(0,MAX_RETRIES):
     #Requests
         r = requests.get(
-            f'https://query2.finance.yahoo.com/v8/finance/chart/{ticker}?period1=1732143600&period2=1732662000&interval=1m&includePrePost=true&events=div%7Csplit%7Cearn&&lang=en-US&region=US',
+            f'https://query2.finance.yahoo.com/v8/finance/chart/{ticker}',
             #cookies=cookies,
             headers=HTTP_HEADERS,
         )
@@ -103,3 +103,5 @@ def GetCurrentPrice(ticker: str):
                         HTTPCodes[2] = code['description']
                     
                 return STOCK_ERROR ,HTTPCodes
+            
+print(GetCurrentPrice('VOO'))

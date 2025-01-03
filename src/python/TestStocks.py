@@ -3,9 +3,9 @@
 import GetPrice as Prices
 import GetStocksDaily as Daily
 import time
-Stocks = Prices.LoadJson('StockList.json')
+Stocks = Prices.LoadJson('src/data/StockList.json')
 Daily.GetTopStocks(25)
-TrendingStocks = Prices.LoadJson('TrendingStocks.json')
+TrendingStocks = Prices.LoadJson('src/data/TrendingStocks.json')
 
 
 for stock in TrendingStocks:

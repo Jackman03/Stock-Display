@@ -19,7 +19,7 @@ def GetTopStocks(StockLimit: int):
 
    
     TrendingStocks = []
-    StockList = Prices.LoadJson('StockList.json')
+    StockList = Prices.LoadJson('src/data/StockList.json')
 
     for row in StockTable.find_all(class_='row false yf-paf8n5'):
          ticker = (row.find(class_='symbol yf-1m808gl').text).rstrip()
@@ -32,7 +32,7 @@ def GetTopStocks(StockLimit: int):
    
 
 
-    with open('TrendingStocks.json' , 'w') as json_file:
+    with open('src/data/TrendingStocks.json' , 'w') as json_file:
             json.dump(TrendingStocks, json_file,indent=1)
 
 
