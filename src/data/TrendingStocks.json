@@ -1,5 +1,9 @@
 [
  {
+  "Ticker": "PLUG",
+  "Name": "Plug Power Inc. "
+ },
+ {
   "Ticker": "RGTI",
   "Name": "Rigetti Computing, Inc. "
  },
@@ -8,24 +12,8 @@
   "Name": "Lucid Group, Inc. "
  },
  {
-  "Ticker": "SOFI",
-  "Name": "SoFi Technologies, Inc. "
- },
- {
   "Ticker": "PLTR",
   "Name": "Palantir Technologies Inc. "
- },
- {
-  "Ticker": "F",
-  "Name": "Ford Motor Company "
- },
- {
-  "Ticker": "BBD",
-  "Name": "Banco Bradesco S.A. "
- },
- {
-  "Ticker": "NIO",
-  "Name": "NIO Inc. "
  },
  {
   "Ticker": "QBTS",
@@ -36,47 +24,67 @@
   "Name": "SoundHound AI, Inc. "
  },
  {
-  "Ticker": "PLUG",
-  "Name": "Plug Power Inc. "
- },
- {
   "Ticker": "ABEV",
   "Name": "Ambev S.A. "
- },
- {
-  "Ticker": "MARA",
-  "Name": "MARA Holdings, Inc. "
- },
- {
-  "Ticker": "WULF",
-  "Name": "TeraWulf Inc. "
  },
  {
   "Ticker": "INTC",
   "Name": "Intel Corporation "
  },
  {
-  "Ticker": "ACHR",
-  "Name": "Archer Aviation Inc. "
- },
- {
-  "Ticker": "PFE",
-  "Name": "Pfizer Inc. "
- },
- {
-  "Ticker": "U",
-  "Name": "Unity Software Inc. "
+  "Ticker": "F",
+  "Name": "Ford Motor Company "
  },
  {
   "Ticker": "RIVN",
   "Name": "Rivian Automotive, Inc. "
  },
  {
-  "Ticker": "RIG",
-  "Name": "Transocean Ltd. "
+  "Ticker": "SMCI",
+  "Name": "Super Micro Computer, Inc. "
  },
  {
-  "Ticker": "WBD",
-  "Name": "Warner Bros. Discovery, Inc. "
+  "Ticker": "NIO",
+  "Name": "NIO Inc. "
+ },
+ {
+  "Ticker": "BBD",
+  "Name": "Banco Bradesco S.A. "
+ },
+ {
+  "Ticker": "QUBT",
+  "Name": "Quantum Computing Inc. "
+ },
+ {
+  "Ticker": "MARA",
+  "Name": "MARA Holdings, Inc. "
+ },
+ {
+  "Ticker": "MU",
+  "Name": "Micron Technology, Inc. "
+ },
+ {
+  "Ticker": "ACHR",
+  "Name": "Archer Aviation Inc. "
+ },
+ {
+  "Ticker": "QS",
+  "Name": "QuantumScape Corporation "
+ },
+ {
+  "Ticker": "WULF",
+  "Name": "TeraWulf Inc. "
+ },
+ {
+  "Ticker": "PFE",
+  "Name": "Pfizer Inc. "
+ },
+ {
+  "Ticker": "UBER",
+  "Name": "Uber Technologies, Inc. "
+ },
+ {
+  "Ticker": "SOFI",
+  "Name": "SoFi Technologies, Inc. "
  }
 ]

@@ -5,7 +5,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-import GetPrice as Prices
+from GetPrice import GetCurrentPrice, LoadJson
 
 
 #read in list of current stocks.
@@ -19,7 +19,7 @@ def GetTopStocks(StockLimit: int):
 
    
     TrendingStocks = []
-    StockList = Prices.LoadJson('src/data/StockList.json')
+    StockList = LoadJson('src/data/StockList.json')
 
     for row in StockTable.find_all(class_='row false yf-paf8n5'):
          ticker = (row.find(class_='symbol yf-1m808gl').text).rstrip()
@@ -43,9 +43,3 @@ def CheckLists(StockList, Ticker: str):
             #print(f'{Ticker} is dupe')
             return True
     return False
-        
-         
-    
-
-#reset the list at market close
-GetTopStocks(50)

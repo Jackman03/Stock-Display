@@ -2,7 +2,6 @@
 #idea is to get the top 50 stocks for the day and display them
 import GetPrice as Prices
 import GetStocksDaily as Daily
-import time
 Stocks = Prices.LoadJson('src/data/StockList.json')
 Daily.GetTopStocks(25)
 TrendingStocks = Prices.LoadJson('src/data/TrendingStocks.json')

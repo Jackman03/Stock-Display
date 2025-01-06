@@ -103,5 +103,3 @@ def GetCurrentPrice(ticker: str):
                         HTTPCodes[2] = code['description']
                     
                 return STOCK_ERROR ,HTTPCodes
-            
-print(GetCurrentPrice('VOO'))
