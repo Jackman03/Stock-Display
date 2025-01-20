@@ -91,6 +91,3 @@ def write(message,line):
 #Sends the clear signal to clear the screen	
 def clear():
 	send_byte(0x01,CMD)
-	
-
-
